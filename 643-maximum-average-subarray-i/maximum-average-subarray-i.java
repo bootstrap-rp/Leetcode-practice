@@ -1,22 +1,24 @@
 class Solution {
     public double findMaxAverage(int[] nums, int k) {
         int n=nums.length;
-        if(k>n){
-            throw new IllegalArgumentException("K shold not be greater than n");
-        }
+        int left=0;
+        int right=k-1;
+      
+        int currSum=0;
         double avg=0;
-        int windowSum=0;
-        for(int i=0;i<k;i++){
-            windowSum+=nums[i];
+        for(int i=left;i<=right;i++){
+            currSum+=nums[i];
         }
-
-        double maxSum=windowSum;
-        for(int i=k;i<n;i++){
-            windowSum+=nums[i]-nums[i-k];
-            maxSum=Math.max(maxSum,windowSum);
-            
+        int maxSum=currSum;
+        while(right<n-1){
+            currSum-=nums[left];
+            left++;
+            right++;
+            currSum+=nums[right];
+            maxSum=Math.max(maxSum,currSum);
         }
-        avg=maxSum/k;
+        avg=(double) maxSum/k;
         return avg;
+
     }
 }
