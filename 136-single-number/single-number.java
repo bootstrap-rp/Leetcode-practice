@@ -1,12 +1,17 @@
 class Solution {
     public int singleNumber(int[] nums) {
-
-
-    int res=0;
-    for(int i:nums){
-        res^=i;
-    }
-    return res;
-
+        HashSet<Integer> set=new HashSet<>();
+        for(int num:nums){
+            if(set.contains(num)){
+                set.remove(num);
+            }
+            else{
+                set.add(num);
+            }
+        }
+        for(int val:set){
+           return val; 
+        }
+        return -1;
     }
 }
